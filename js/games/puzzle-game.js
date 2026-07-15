@@ -10,7 +10,7 @@
  * fonts and would make pieces not line up.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const PIECE_SIZE = 110;
@@ -120,13 +120,13 @@
   }
 
   function buildSlot(index, container) {
-    const slot = Luna.helpers.el('div', 'pz-slot', { 'data-index': String(index) });
+    const slot = Atasha.helpers.el('div', 'pz-slot', { 'data-index': String(index) });
     container.appendChild(slot);
     return slot;
   }
 
   function buildPiece(index, container) {
-    const piece = Luna.helpers.el('div', 'pz-piece', { 'data-index': String(index) });
+    const piece = Atasha.helpers.el('div', 'pz-piece', { 'data-index': String(index) });
     piece.style.backgroundImage = `url(${dataUrl})`;
     piece.style.backgroundPosition = offsetFor(index);
     container.appendChild(piece);
@@ -134,8 +134,8 @@
   }
 
   function attachDrag(pieceEl, index, slots, onPlaced) {
-    const cleanup = Luna.helpers.makeDraggable(pieceEl, (x, y) => {
-      const targetSlot = slots.find((s) => Luna.helpers.isPointInside(x, y, s));
+    const cleanup = Atasha.helpers.makeDraggable(pieceEl, (x, y) => {
+      const targetSlot = slots.find((s) => Atasha.helpers.isPointInside(x, y, s));
       if (targetSlot && Number(targetSlot.dataset.index) === index) {
         targetSlot.style.backgroundImage = `url(${dataUrl})`;
         targetSlot.style.backgroundPosition = offsetFor(index);
@@ -158,7 +158,7 @@
     api = gameApi;
     placedCount = 0;
     cleanupFns = [];
-    picture = Luna.helpers.shuffle(PICTURES)[0];
+    picture = Atasha.helpers.shuffle(PICTURES)[0];
     dataUrl = renderPicture();
 
     container.innerHTML = `
@@ -177,7 +177,7 @@
     const slots = [0, 1, 2, 3].map((i) => buildSlot(i, board));
     const tray = container.querySelector('.pz-tray');
 
-    Luna.helpers.shuffle([0, 1, 2, 3]).forEach((index) => {
+    Atasha.helpers.shuffle([0, 1, 2, 3]).forEach((index) => {
       const piece = buildPiece(index, tray);
       attachDrag(piece, index, slots, () => {
         placedCount += 1;
@@ -201,7 +201,7 @@
     cleanupFns = [];
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'puzzle-game',
     title: 'Puzzle',
     emoji: '🧩',
@@ -210,4 +210,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

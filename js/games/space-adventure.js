@@ -11,7 +11,7 @@
  * conflicts with the whole app's no-punishment design.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const STAR_GOAL = 6;
@@ -37,16 +37,16 @@
 
   function renderItem(item) {
     if (item.kind === 'star') {
-      const el = Luna.helpers.el('div', 'sa2-item sa2-star');
+      const el = Atasha.helpers.el('div', 'sa2-item sa2-star');
       el.textContent = '⭐';
       return el;
     }
     if (item.kind === 'planet') {
-      const el = Luna.helpers.el('div', 'sa2-item sa2-planet');
+      const el = Atasha.helpers.el('div', 'sa2-item sa2-planet');
       el.textContent = item.data.emoji;
       return el;
     }
-    const el = Luna.helpers.el('div', 'sa2-item sa2-asteroid');
+    const el = Atasha.helpers.el('div', 'sa2-item sa2-asteroid');
     el.textContent = '🪨';
     return el;
   }
@@ -68,7 +68,7 @@
     const playArea = container.querySelector('.sa2-play-area');
     playArea.style.position = 'relative';
 
-    engine = Luna.floatingObjects.create(playArea, {
+    engine = Atasha.floatingObjects.create(playArea, {
       items: ITEM_POOL,
       renderItem,
       speed: 48,
@@ -112,7 +112,7 @@
     engine = null;
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'space-adventure',
     title: 'Space Adventure',
     emoji: '🚀',
@@ -121,4 +121,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

@@ -13,7 +13,7 @@
  * anonymous-authorship folk songs, freely reproducible in full).
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const SONGS = [
@@ -111,7 +111,7 @@
     const fallbackMs = Math.max(1800, words * 420);
     const fallbackTimer = setTimeout(advanceOnce, fallbackMs);
 
-    Luna.speech.speak(song.lines[index], {
+    Atasha.speech.speak(song.lines[index], {
       onEnd: () => {
         clearTimeout(fallbackTimer);
         advanceOnce();
@@ -135,7 +135,7 @@
   function init(containerEl, gameApi) {
     api = gameApi;
     container = containerEl;
-    song = Luna.helpers.shuffle(SONGS)[0];
+    song = Atasha.helpers.shuffle(SONGS)[0];
     singing = false;
     currentLine = 0;
 
@@ -164,7 +164,7 @@
     container.querySelector('.sa-sing-btn').addEventListener('click', (e) => {
       if (singing) {
         singing = false;
-        Luna.speech.stop();
+        Atasha.speech.stop();
         e.currentTarget.textContent = '🎤 Sing Along';
       } else {
         singing = true;
@@ -175,17 +175,17 @@
 
     container.querySelector('.sa-done-button').addEventListener('click', () => {
       singing = false;
-      Luna.speech.stop();
+      Atasha.speech.stop();
       onSongFinished();
     });
   }
 
   function destroy() {
     singing = false;
-    Luna.speech.stop();
+    Atasha.speech.stop();
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'sing-along',
     title: 'Sing Along',
     emoji: '🎤',
@@ -194,4 +194,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

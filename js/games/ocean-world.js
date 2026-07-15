@@ -9,7 +9,7 @@
  * different content, proving that pattern generalizes past letters/animals.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const CREATURE_BANK = [
@@ -27,18 +27,18 @@
   let clickHandlers = [];
 
   function buildIdentifyStage() {
-    const decoyPool = Luna.helpers.shuffle(CREATURE_BANK);
+    const decoyPool = Atasha.helpers.shuffle(CREATURE_BANK);
     const correct = decoyPool[0];
     const decoys = decoyPool.slice(1, 3);
-    return { type: 'identify', correct, choices: Luna.helpers.shuffle([correct, ...decoys]) };
+    return { type: 'identify', correct, choices: Atasha.helpers.shuffle([correct, ...decoys]) };
   }
 
   function buildCountStage() {
     const count = 2 + Math.floor(Math.random() * 4); // 2-5 fish, gentle range
-    const wrongOptions = Luna.helpers.shuffle(
+    const wrongOptions = Atasha.helpers.shuffle(
       [count - 1, count + 1, count + 2].filter((n) => n > 0 && n !== count)
     ).slice(0, 2);
-    return { type: 'count', count, choices: Luna.helpers.shuffle([count, ...wrongOptions]) };
+    return { type: 'count', count, choices: Atasha.helpers.shuffle([count, ...wrongOptions]) };
   }
 
   function renderIdentify(container, stage) {
@@ -59,7 +59,7 @@
     const row = container.querySelector('.as-choices-row');
     clickHandlers = [];
     stage.choices.forEach((choice) => {
-      const btn = Luna.helpers.el('button', 'as-choice', { 'aria-label': choice.name });
+      const btn = Atasha.helpers.el('button', 'as-choice', { 'aria-label': choice.name });
       btn.innerHTML = `<span class="as-choice-emoji">${choice.emoji}</span>`;
       row.appendChild(btn);
       const handler = () => {
@@ -94,7 +94,7 @@
     const row = container.querySelector('.ow-number-row');
     clickHandlers = [];
     stage.choices.forEach((num) => {
-      const btn = Luna.helpers.el('button', 'as-choice ow-number-choice', { 'aria-label': String(num) });
+      const btn = Atasha.helpers.el('button', 'as-choice ow-number-choice', { 'aria-label': String(num) });
       btn.textContent = String(num);
       row.appendChild(btn);
       const handler = () => {
@@ -156,7 +156,7 @@
     clickHandlers = [];
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'ocean-world',
     title: 'Ocean World',
     emoji: '🌊',
@@ -165,4 +165,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

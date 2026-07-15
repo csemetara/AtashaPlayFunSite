@@ -13,7 +13,7 @@
  * this one function (playCurrentSound), nothing else would change.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const ANIMAL_BANK = [
@@ -33,8 +33,8 @@
   let clickHandlers = [];
 
   function pickChoices(correctEntry) {
-    const decoys = Luna.helpers.shuffle(ANIMAL_BANK.filter((a) => a.name !== correctEntry.name)).slice(0, 2);
-    return Luna.helpers.shuffle([correctEntry, ...decoys]);
+    const decoys = Atasha.helpers.shuffle(ANIMAL_BANK.filter((a) => a.name !== correctEntry.name)).slice(0, 2);
+    return Atasha.helpers.shuffle([correctEntry, ...decoys]);
   }
 
   function playCurrentSound(entry) {
@@ -60,7 +60,7 @@
     const choicesRow = container.querySelector('.as-choices-row');
     clickHandlers = [];
     choices.forEach((choiceEntry) => {
-      const btn = Luna.helpers.el('button', 'as-choice', { 'aria-label': choiceEntry.name });
+      const btn = Atasha.helpers.el('button', 'as-choice', { 'aria-label': choiceEntry.name });
       btn.innerHTML = `<span class="as-choice-emoji">${choiceEntry.emoji}</span>`;
       choicesRow.appendChild(btn);
 
@@ -98,7 +98,7 @@
   function init(container, gameApi) {
     api = gameApi;
     currentIndex = 0;
-    roundAnimals = Luna.helpers.shuffle(ANIMAL_BANK).slice(0, 3);
+    roundAnimals = Atasha.helpers.shuffle(ANIMAL_BANK).slice(0, 3);
     renderStage(container);
   }
 
@@ -120,7 +120,7 @@
     clickHandlers = [];
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'animal-sounds',
     title: 'Animal Sounds',
     emoji: '🐾',
@@ -129,4 +129,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

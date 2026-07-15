@@ -12,7 +12,7 @@
  * design principle for the whole app.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   /**
@@ -123,5 +123,5 @@
     return { start, stop, destroy };
   }
 
-  Luna.floatingObjects = { create };
-})(window.Luna = window.Luna || {});
+  Atasha.floatingObjects = { create };
+})(window.Atasha = window.Atasha || {});

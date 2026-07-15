@@ -3,12 +3,12 @@
  * -----------------------------------------------------------------------
  * Single Responsibility: the star/badge economy.
  * Games never manipulate stars/badges directly — they call
- * Luna.rewards.awardStars(n, gameId) and this module decides what that
+ * Atasha.rewards.awardStars(n, gameId) and this module decides what that
  * unlocks. Keeping this separate means the whole reward system (or its
  * difficulty curve) can change without touching a single game file.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const BADGES = [
@@ -21,7 +21,7 @@
     let newlyUnlocked = [];
     let totalStars = 0;
 
-    Luna.storage.update((state) => {
+    Atasha.storage.update((state) => {
       state.stars += amount;
       totalStars = state.stars;
 
@@ -34,20 +34,20 @@
       });
     });
 
-    if (gameId) Luna.storage.recordGameCompletion(gameId);
+    if (gameId) Atasha.storage.recordGameCompletion(gameId);
 
-    Luna.audio.play('starEarned');
+    Atasha.audio.play('starEarned');
     return { totalStars, newlyUnlocked };
   }
 
   function getStars() {
-    return Luna.storage.get('stars') || 0;
+    return Atasha.storage.get('stars') || 0;
   }
 
   function getBadges() {
-    const earnedIds = Luna.storage.get('badges') || [];
+    const earnedIds = Atasha.storage.get('badges') || [];
     return BADGES.filter((b) => earnedIds.includes(b.id));
   }
 
-  Luna.rewards = { awardStars, getStars, getBadges, BADGES };
-})(window.Luna = window.Luna || {});
+  Atasha.rewards = { awardStars, getStars, getBadges, BADGES };
+})(window.Atasha = window.Atasha || {});

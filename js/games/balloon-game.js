@@ -11,7 +11,7 @@
  * they never nag.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const COLOR_HEX = {
@@ -32,7 +32,7 @@
     const type = Math.random() < 0.5 ? 'color' : 'number';
     if (type === 'color') {
       const target = COLORS[Math.floor(Math.random() * COLORS.length)];
-      const distractors = Luna.helpers.shuffle(COLORS.filter((c) => c !== target)).slice(0, 2);
+      const distractors = Atasha.helpers.shuffle(COLORS.filter((c) => c !== target)).slice(0, 2);
       // Target appears 3x among 5 pool entries (60%) so the goal is reachable
       // at a comfortable pace for a young child, while distractors still
       // require her to actually look before tapping.
@@ -44,7 +44,7 @@
       };
     }
     const target = NUMBERS[Math.floor(Math.random() * NUMBERS.length)];
-    const distractors = Luna.helpers.shuffle(NUMBERS.filter((n) => n !== target)).slice(0, 2);
+    const distractors = Atasha.helpers.shuffle(NUMBERS.filter((n) => n !== target)).slice(0, 2);
     return {
       type,
       target,
@@ -59,7 +59,7 @@
   }
 
   function buildBalloon(data) {
-    const el = Luna.helpers.el('div', 'bg-balloon');
+    const el = Atasha.helpers.el('div', 'bg-balloon');
     if (objective.type === 'color') {
       el.style.background = COLOR_HEX[data.color];
     } else {
@@ -88,7 +88,7 @@
     const playArea = container.querySelector('.bp-play-area');
     playArea.style.position = 'relative';
 
-    engine = Luna.floatingObjects.create(playArea, {
+    engine = Atasha.floatingObjects.create(playArea, {
       items: objective.items,
       renderItem: buildBalloon,
       speed: 42,
@@ -137,7 +137,7 @@
     engine = null;
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'balloon-game',
     title: 'Balloon Game',
     emoji: '🎈',
@@ -146,4 +146,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

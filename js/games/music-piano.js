@@ -3,11 +3,11 @@
  * -----------------------------------------------------------------------
  * Tap keys to play notes; Record then Play to hear a melody played back
  * with its original timing. New engine: real musical frequencies via
- * Luna.audio.playTone (added as a small additive export to audio.js).
+ * Atasha.audio.playTone (added as a small additive export to audio.js).
  * Open-ended like Color World — no goal, completion is child-initiated.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   // C major scale, one octave — simple, always-consonant, no wrong notes.
@@ -31,7 +31,7 @@
   function pressKey(keyEl, keyData) {
     keyEl.classList.add('mp-key-active');
     setTimeout(() => keyEl.classList.remove('mp-key-active'), 200);
-    Luna.audio.playTone(keyData.freq, 0.5);
+    Atasha.audio.playTone(keyData.freq, 0.5);
     if (recording) {
       recordedNotes.push({ freq: keyData.freq, atMs: Date.now() - recordStartTime });
     }
@@ -59,7 +59,7 @@
 
     const keysRow = container.querySelector('.mp-keys-row');
     KEYS.forEach((keyData) => {
-      const key = Luna.helpers.el('button', 'mp-key', { 'aria-label': `Note ${keyData.note}` });
+      const key = Atasha.helpers.el('button', 'mp-key', { 'aria-label': `Note ${keyData.note}` });
       key.style.background = keyData.color;
       key.addEventListener('click', () => pressKey(key, keyData));
       keysRow.appendChild(key);
@@ -89,7 +89,7 @@
         return;
       }
       recordedNotes.forEach((n) => {
-        const t = setTimeout(() => Luna.audio.playTone(n.freq, 0.4), n.atMs);
+        const t = setTimeout(() => Atasha.audio.playTone(n.freq, 0.4), n.atMs);
         playbackTimers.push(t);
       });
     });
@@ -113,7 +113,7 @@
     playbackTimers = [];
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'music-piano',
     title: 'Music Piano',
     emoji: '🎹',
@@ -122,4 +122,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

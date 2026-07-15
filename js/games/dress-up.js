@@ -9,7 +9,7 @@
  * outfit) — the only feedback is delighted rather than corrective.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const STAGE_W = 260, STAGE_H = 320;
@@ -73,7 +73,7 @@
   let api = null;
 
   function buildStage(container) {
-    const stage = Luna.helpers.el('div', 'du-stage');
+    const stage = Atasha.helpers.el('div', 'du-stage');
     stage.style.width = `${STAGE_W}px`;
     stage.style.height = `${STAGE_H}px`;
     const canvas = document.createElement('canvas');
@@ -87,7 +87,7 @@
   }
 
   function buildTrayItem(accessory, container) {
-    const item = Luna.helpers.el('div', 'du-tray-item', { 'data-id': accessory.id });
+    const item = Atasha.helpers.el('div', 'du-tray-item', { 'data-id': accessory.id });
     item.style.fontSize = accessory.size;
     item.textContent = accessory.emoji;
     container.appendChild(item);
@@ -95,7 +95,7 @@
   }
 
   function equip(stage, accessory) {
-    const worn = Luna.helpers.el('div', 'du-worn-item');
+    const worn = Atasha.helpers.el('div', 'du-worn-item');
     worn.style.left = accessory.anchor.left;
     worn.style.top = accessory.anchor.top;
     worn.style.fontSize = accessory.size;
@@ -104,8 +104,8 @@
   }
 
   function attachDrag(itemEl, accessory, stage, onEquipped) {
-    const cleanup = Luna.helpers.makeDraggable(itemEl, (x, y) => {
-      if (Luna.helpers.isPointInside(x, y, stage)) {
+    const cleanup = Atasha.helpers.makeDraggable(itemEl, (x, y) => {
+      if (Atasha.helpers.isPointInside(x, y, stage)) {
         equip(stage, accessory);
         itemEl.style.display = 'none';
         api.playSound('success');
@@ -142,7 +142,7 @@
     const stage = buildStage(stageWrap);
     const tray = container.querySelector('.du-tray');
 
-    Luna.helpers.shuffle(ACCESSORIES).forEach((accessory) => {
+    Atasha.helpers.shuffle(ACCESSORIES).forEach((accessory) => {
       const item = buildTrayItem(accessory, tray);
       attachDrag(item, accessory, stage, () => {
         equippedCount += 1;
@@ -168,7 +168,7 @@
     cleanupFns = [];
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'dress-up',
     title: 'Dress-Up',
     emoji: '👑',
@@ -177,4 +177,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

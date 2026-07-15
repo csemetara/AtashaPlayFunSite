@@ -9,7 +9,7 @@
  * loops" used elsewhere (no correctness check here at all).
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const STORIES = [
@@ -89,7 +89,7 @@
 
   function init(container, gameApi) {
     api = gameApi;
-    story = Luna.helpers.shuffle(STORIES)[0];
+    story = Atasha.helpers.shuffle(STORIES)[0];
     pageIndex = 0;
     renderPage(container);
   }
@@ -112,7 +112,7 @@
     // (each renderPage call replaces innerHTML, detaching old listeners).
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'story-time',
     title: 'Story Time',
     emoji: '📖',
@@ -121,4 +121,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

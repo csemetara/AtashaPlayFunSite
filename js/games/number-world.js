@@ -13,7 +13,7 @@
  * one constant (MAX_NUMBER) if that turns out to be too easy for her.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const MAX_NUMBER = 10;
@@ -29,22 +29,22 @@
 
   function buildCountStage() {
     const count = randInt(2, 8);
-    const wrong = Luna.helpers.shuffle(
+    const wrong = Atasha.helpers.shuffle(
       [count - 1, count + 1, count + 2].filter((n) => n > 0 && n <= MAX_NUMBER && n !== count)
     ).slice(0, 2);
-    return { type: 'count', count, choices: Luna.helpers.shuffle([count, ...wrong]) };
+    return { type: 'count', count, choices: Atasha.helpers.shuffle([count, ...wrong]) };
   }
 
   function buildMatchStage() {
-    const chosen = Luna.helpers.shuffle(
+    const chosen = Atasha.helpers.shuffle(
       Array.from({ length: MAX_NUMBER }, (_, i) => i + 1)
     ).slice(0, 3);
     return { type: 'match', numbers: chosen };
   }
 
   function buildOrderStage() {
-    const nums = Luna.helpers.shuffle(
-      Luna.helpers.shuffle(Array.from({ length: MAX_NUMBER }, (_, i) => i + 1)).slice(0, 3).sort((a, b) => a - b)
+    const nums = Atasha.helpers.shuffle(
+      Atasha.helpers.shuffle(Array.from({ length: MAX_NUMBER }, (_, i) => i + 1)).slice(0, 3).sort((a, b) => a - b)
     );
     return { type: 'order', numbers: nums, sorted: [...nums].sort((a, b) => a - b) };
   }
@@ -62,7 +62,7 @@
     `;
     const row = container.querySelector('.ow-number-row');
     stage.choices.forEach((num) => {
-      const btn = Luna.helpers.el('button', 'as-choice ow-number-choice', { 'aria-label': String(num) });
+      const btn = Atasha.helpers.el('button', 'as-choice ow-number-choice', { 'aria-label': String(num) });
       btn.textContent = String(num);
       row.appendChild(btn);
       btn.addEventListener('click', () => {
@@ -95,8 +95,8 @@
     const targetsRow = container.querySelector('.nw-targets-row');
     const numeralsRow = container.querySelector('.nw-numerals-row');
 
-    const targets = Luna.helpers.shuffle(stage.numbers).map((n) => {
-      const target = Luna.helpers.el('div', 'nw-target', { 'data-number': String(n) });
+    const targets = Atasha.helpers.shuffle(stage.numbers).map((n) => {
+      const target = Atasha.helpers.el('div', 'nw-target', { 'data-number': String(n) });
       target.innerHTML = `<span class="nw-dots">${'●'.repeat(n)}</span>`;
       targetsRow.appendChild(target);
       return target;
@@ -105,12 +105,12 @@
     let matchedCount = 0;
     cleanupFns = [];
     stage.numbers.forEach((n) => {
-      const numeral = Luna.helpers.el('div', 'nw-numeral', { 'data-number': String(n) });
+      const numeral = Atasha.helpers.el('div', 'nw-numeral', { 'data-number': String(n) });
       numeral.textContent = String(n);
       numeralsRow.appendChild(numeral);
 
-      const cleanup = Luna.helpers.makeDraggable(numeral, (x, y) => {
-        const targetEl = targets.find((t) => Luna.helpers.isPointInside(x, y, t));
+      const cleanup = Atasha.helpers.makeDraggable(numeral, (x, y) => {
+        const targetEl = targets.find((t) => Atasha.helpers.isPointInside(x, y, t));
         if (targetEl && Number(targetEl.dataset.number) === n) {
           numeral.classList.add('nw-numeral-matched');
           numeral.style.pointerEvents = 'none';
@@ -145,7 +145,7 @@
     let nextIndex = 0;
     const row = container.querySelector('.nw-order-row');
     stage.numbers.forEach((num) => {
-      const btn = Luna.helpers.el('button', 'as-choice ow-number-choice', { 'aria-label': String(num) });
+      const btn = Atasha.helpers.el('button', 'as-choice ow-number-choice', { 'aria-label': String(num) });
       btn.textContent = String(num);
       row.appendChild(btn);
       btn.addEventListener('click', () => {
@@ -213,7 +213,7 @@
     cleanupFns = [];
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'number-world',
     title: 'Number World',
     emoji: '🔢',
@@ -222,4 +222,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

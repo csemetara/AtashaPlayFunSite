@@ -6,7 +6,7 @@
  * drag-and-drop engine generalizes cleanly across themes.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const PAIRS = [
@@ -22,22 +22,22 @@
   let api = null;
 
   function buildAnimal(pair, container) {
-    const pen = Luna.helpers.el('div', 'fa-pen', { 'data-food': pair.food });
+    const pen = Atasha.helpers.el('div', 'fa-pen', { 'data-food': pair.food });
     pen.innerHTML = `<div class="fa-animal">${pair.animal}</div>`;
     container.appendChild(pen);
     return pen;
   }
 
   function buildFood(pair, container) {
-    const item = Luna.helpers.el('div', 'fa-food', { 'data-food': pair.food });
+    const item = Atasha.helpers.el('div', 'fa-food', { 'data-food': pair.food });
     item.textContent = pair.food;
     container.appendChild(item);
     return item;
   }
 
   function attachDrag(itemEl, pair, pens, onMatched) {
-    const cleanup = Luna.helpers.makeDraggable(itemEl, (x, y) => {
-      const targetPen = pens.find((p) => Luna.helpers.isPointInside(x, y, p));
+    const cleanup = Atasha.helpers.makeDraggable(itemEl, (x, y) => {
+      const targetPen = pens.find((p) => Atasha.helpers.isPointInside(x, y, p));
       if (targetPen && targetPen.dataset.food === pair.food) {
         itemEl.classList.add('fa-food-fed');
         itemEl.style.pointerEvents = 'none';
@@ -62,7 +62,7 @@
     matchedCount = 0;
     cleanupFns = [];
 
-    const chosen = Luna.helpers.shuffle(PAIRS).slice(0, 4);
+    const chosen = Atasha.helpers.shuffle(PAIRS).slice(0, 4);
 
     container.innerHTML = `
       <div class="game-header">
@@ -76,7 +76,7 @@
     const pensRow = container.querySelector('.fa-pens-row');
     const foodRow = container.querySelector('.fa-food-row');
 
-    const pens = Luna.helpers.shuffle(chosen).map((pair) => buildAnimal(pair, pensRow));
+    const pens = Atasha.helpers.shuffle(chosen).map((pair) => buildAnimal(pair, pensRow));
     chosen.forEach((pair) => {
       const itemEl = buildFood(pair, foodRow);
       attachDrag(itemEl, pair, pens, () => {
@@ -103,7 +103,7 @@
     cleanupFns = [];
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'farm-adventure',
     title: 'Farm Adventure',
     emoji: '🚜',
@@ -112,4 +112,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

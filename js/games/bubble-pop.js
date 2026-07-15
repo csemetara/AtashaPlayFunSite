@@ -8,7 +8,7 @@
  * makes it a good fit alongside Color Match for low-pressure play.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const CONTENT_BANK = [
@@ -25,7 +25,7 @@
   let finished = false;
 
   function buildBubble(data) {
-    const el = Luna.helpers.el('div', 'bp-bubble');
+    const el = Atasha.helpers.el('div', 'bp-bubble');
     el.innerHTML = `<span>${data.emoji}</span>`;
     return el;
   }
@@ -47,7 +47,7 @@
     const playArea = container.querySelector('.bp-play-area');
     playArea.style.position = 'relative';
 
-    engine = Luna.floatingObjects.create(playArea, {
+    engine = Atasha.floatingObjects.create(playArea, {
       items: CONTENT_BANK,
       renderItem: buildBubble,
       speed: 45,
@@ -87,7 +87,7 @@
     engine = null;
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'bubble-pop',
     title: 'Bubble Pop',
     emoji: '🫧',
@@ -96,4 +96,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

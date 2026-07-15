@@ -4,12 +4,12 @@
  * Single Responsibility: sound effects.
  * All effects are synthesized in-browser with the Web Audio API — no mp3
  * files, no CDN, no licensing risk, and it works with zero network access.
- * Every game calls Luna.audio.play('success') etc.; none of them touch
+ * Every game calls Atasha.audio.play('success') etc.; none of them touch
  * AudioContext directly (Dependency Inversion — games depend on this
  * interface, not on the Web Audio API itself).
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   let ctx = null;
@@ -25,11 +25,11 @@
   }
 
   function isMuted() {
-    return !!Luna.storage.get('muted');
+    return !!Atasha.storage.get('muted');
   }
 
   function getVolume() {
-    const v = Luna.storage.get('volume');
+    const v = Atasha.storage.get('volume');
     return typeof v === 'number' ? v : 0.8;
   }
 
@@ -91,7 +91,7 @@
       return;
     }
     // In calm mode, soften everything to a single short tone
-    if (Luna.storage.get('calmMode') && presetName !== 'tap') {
+    if (Atasha.storage.get('calmMode') && presetName !== 'tap') {
       playNotes([{ freq: 523.25, dur: 0.18 }]);
       return;
     }
@@ -107,5 +107,5 @@
     playNotes([{ freq, dur: duration, type: 'sine' }]);
   }
 
-  Luna.audio = { play, playTone, isMuted, getVolume };
-})(window.Luna = window.Luna || {});
+  Atasha.audio = { play, playTone, isMuted, getVolume };
+})(window.Atasha = window.Atasha || {});

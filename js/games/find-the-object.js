@@ -12,7 +12,7 @@
  * container size, which is what makes this responsive-safe.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const SCENE_W = 500, SCENE_H = 360;
@@ -89,7 +89,7 @@
 
   function init(container, gameApi) {
     api = gameApi;
-    scene = Luna.helpers.shuffle(SCENES)[0];
+    scene = Atasha.helpers.shuffle(SCENES)[0];
     foundIds = new Set();
     if (hintTimer) clearTimeout(hintTimer);
 
@@ -109,7 +109,7 @@
     const sceneEl = container.querySelector('.fo-scene');
 
     scene.targets.forEach((target, i) => {
-      const hotspot = Luna.helpers.el('button', 'fo-hotspot', {
+      const hotspot = Atasha.helpers.el('button', 'fo-hotspot', {
         'data-index': String(i),
         'aria-label': `Find the ${target.name}`,
       });
@@ -156,7 +156,7 @@
     hintTimer = null;
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'find-the-object',
     title: 'Find the Object',
     emoji: '🔍',
@@ -165,4 +165,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});
