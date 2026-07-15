@@ -165,6 +165,8 @@ button {
 .theme-berry { background: linear-gradient(160deg, #FFF9F0, #F6DFF0); }
 .theme-peach { background: linear-gradient(160deg, #FFF9F0, #FFE7CE); }
 .theme-sky   { background: linear-gradient(160deg, #FFF9F0, #DDF1FB); }
+.theme-mint  { background: linear-gradient(160deg, #FFF9F0, #DDF5E8); }
+.theme-lavender { background: linear-gradient(160deg, #FFF9F0, #E9E1FB); }
 
 .dashboard-link {
   display: block;
@@ -327,3 +329,89 @@ button {
 }
 .dashboard-note { font-style: italic; }
 .dashboard-footnote { margin-top: 24px; font-size: 0.85rem; opacity: 0.6; }
+
+/* ---------- Shape Matching ---------- */
+.sh-holes-row, .sh-items-row {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  min-height: 90px; /* prevents row collapse mid-drag, see Phase 1 fix */
+}
+.sh-hole, .sh-item { width: 90px; height: 90px; cursor: grab; touch-action: none; user-select: none; }
+.sh-hole-svg, .sh-item-svg { width: 100%; height: 100%; }
+.sh-hole-svg { fill: none; stroke: var(--color-night-soft); stroke-width: 4; stroke-dasharray: 6 5; opacity: 0.5; }
+.sh-hole-filled .sh-hole-svg { fill: var(--color-mint); opacity: 0.3; }
+.sh-item-svg { fill: var(--color-coral); }
+.sh-item-matched { opacity: 0.25; }
+
+/* ---------- ABC Adventure ---------- */
+.abc-big-letter {
+  display: block;
+  margin: 10px auto 20px;
+  font-family: var(--font-display);
+  font-size: 5rem;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: var(--color-coral);
+  color: #fff;
+  box-shadow: var(--shadow-soft);
+}
+.abc-basket-row { display: flex; justify-content: center; margin-bottom: 20px; }
+.abc-basket {
+  width: 130px; height: 100px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 201, 139, 0.4);
+  border-radius: var(--radius-md);
+  border: 3px dashed var(--color-peach);
+}
+.abc-basket-emoji { font-size: 3rem; }
+.abc-choices-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  min-height: 90px; /* prevents row collapse mid-drag, see Phase 1 fix */
+}
+.abc-choice-item { font-size: 3.2rem; cursor: grab; touch-action: none; user-select: none; }
+.abc-choice-matched { opacity: 0.25; }
+
+/* ---------- Color World ---------- */
+.cw-toolbar { display: flex; justify-content: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.cw-tool {
+  background: #fff; border: 2px solid #eee; padding: 10px 16px;
+  border-radius: var(--radius-sm); font-weight: 700; font-size: 0.95rem;
+}
+.cw-tool.active { background: var(--color-coral); color: #fff; border-color: var(--color-coral); }
+.cw-canvas-wrap { display: flex; justify-content: center; margin-bottom: 16px; }
+.cw-canvas, .tr-canvas {
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  touch-action: none;
+  max-width: 100%;
+  height: auto;
+}
+.cw-palette-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.cw-swatch {
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.cw-done-button, .tr-done-button {
+  display: block; margin: 0 auto;
+  background: var(--color-mint); color: var(--color-night-deep);
+  padding: 14px 28px; border-radius: var(--radius-md);
+  font-weight: 800; font-size: 1.05rem;
+}
+
+/* ---------- Tracing ---------- */
+.tr-progress-track {
+  width: 60%; max-width: 400px; height: 14px; margin: 0 auto 16px;
+  background: #eee; border-radius: 999px; overflow: hidden;
+}
+.tr-progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--color-mint), var(--color-sky));
+  transition: width 0.3s ease;
+}
