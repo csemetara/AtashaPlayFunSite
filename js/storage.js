@@ -1,16 +1,16 @@
 /**
  * storage.js
  * -----------------------------------------------------------------------
- * Single Responsibility: all persistence for Atasha's Learning Adventure.
+ * Single Responsibility: all persistence for Luna's Learning Adventure.
  * Nothing else in the app calls localStorage directly — every read/write
  * goes through this module, so swapping LocalStorage for an API later
  * (per the "future ready" requirement) only means editing this one file.
  * -----------------------------------------------------------------------
  */
-(function (Atasha) {
+(function (Luna) {
   'use strict';
 
-  const NAMESPACE = 'Atasha_learning_v1';
+  const NAMESPACE = 'luna_learning_v1';
 
   const DEFAULT_STATE = {
     childName: null,
@@ -85,7 +85,7 @@
     });
   }
 
-  Atasha.storage = {
+  Luna.storage = {
     get,
     set,
     update,
@@ -93,4 +93,4 @@
     recordGameCompletion,
     DEFAULT_STATE,
   };
-})(window.Atasha = window.Atasha || {});
+})(window.Luna = window.Luna || {});

@@ -9,7 +9,7 @@
  * back with encouragement, same as every other game.
  * -----------------------------------------------------------------------
  */
-(function (Atasha) {
+(function (Luna) {
   'use strict';
 
   const LETTER_BANK = [
@@ -30,13 +30,13 @@
 
   function pickDecoys(currentEntry, count) {
     const pool = LETTER_BANK.filter((e) => e.letter !== currentEntry.letter);
-    return Atasha.helpers.shuffle(pool).slice(0, count);
+    return Luna.helpers.shuffle(pool).slice(0, count);
   }
 
   function renderLetterStage(container) {
     const entry = roundLetters[currentIndex];
     const decoys = pickDecoys(entry, 2);
-    const choices = Atasha.helpers.shuffle([entry, ...decoys]);
+    const choices = Luna.helpers.shuffle([entry, ...decoys]);
 
     container.innerHTML = `
       <div class="game-header">
@@ -62,12 +62,12 @@
     const choicesRow = container.querySelector('.abc-choices-row');
 
     choices.forEach((choiceEntry) => {
-      const item = Atasha.helpers.el('div', 'abc-choice-item', { 'data-letter': choiceEntry.letter });
+      const item = Luna.helpers.el('div', 'abc-choice-item', { 'data-letter': choiceEntry.letter });
       item.textContent = choiceEntry.emoji;
       choicesRow.appendChild(item);
 
-      const cleanup = Atasha.helpers.makeDraggable(item, (x, y) => {
-        const inBasket = Atasha.helpers.isPointInside(x, y, basket);
+      const cleanup = Luna.helpers.makeDraggable(item, (x, y) => {
+        const inBasket = Luna.helpers.isPointInside(x, y, basket);
         if (inBasket && choiceEntry.letter === entry.letter) {
           item.classList.add('abc-choice-matched');
           item.style.pointerEvents = 'none';
@@ -104,7 +104,7 @@
     api = gameApi;
     currentIndex = 0;
     cleanupFns = [];
-    roundLetters = Atasha.helpers.shuffle(LETTER_BANK).slice(0, 3);
+    roundLetters = Luna.helpers.shuffle(LETTER_BANK).slice(0, 3);
     renderLetterStage(container);
   }
 
@@ -126,7 +126,7 @@
     cleanupFns = [];
   }
 
-  Atasha.gameRegistry.register({
+  Luna.gameRegistry.register({
     id: 'abc-adventure',
     title: 'ABC Adventure',
     emoji: '🔤',
@@ -135,4 +135,4 @@
     init,
     destroy,
   });
-})(window.Atasha = window.Atasha || {});
+})(window.Luna = window.Luna || {});

@@ -7,7 +7,7 @@
  * silent no-op if the browser doesn't support it, so nothing ever throws.
  * -----------------------------------------------------------------------
  */
-(function (Atasha) {
+(function (Luna) {
   'use strict';
 
   const supported = 'speechSynthesis' in window;
@@ -39,17 +39,17 @@
    * @param {{onEnd?: Function}} [opts]
    */
   function speak(text, opts = {}) {
-    if (!supported || Atasha.storage.get('muted')) {
+    if (!supported || Luna.storage.get('muted')) {
       if (opts.onEnd) opts.onEnd();
       return;
     }
     window.speechSynthesis.cancel(); // don't stack narration
     const utter = new SpeechSynthesisUtterance(text);
-    const calm = Atasha.storage.get('calmMode');
+    const calm = Luna.storage.get('calmMode');
     utter.voice = preferredVoice;
     utter.rate = calm ? 0.85 : 0.95;   // slightly slower for a 4-year-old
     utter.pitch = calm ? 1.0 : 1.15;   // warm, a little playful unless calm mode
-    utter.volume = Atasha.storage.get('volume') ?? 0.8;
+    utter.volume = Luna.storage.get('volume') ?? 0.8;
     if (opts.onEnd) utter.onend = opts.onEnd;
     window.speechSynthesis.speak(utter);
   }
@@ -58,5 +58,5 @@
     if (supported) window.speechSynthesis.cancel();
   }
 
-  Atasha.speech = { speak, stop, isSupported: () => supported };
-})(window.Atasha = window.Atasha || {});
+  Luna.speech = { speak, stop, isSupported: () => supported };
+})(window.Luna = window.Luna || {});

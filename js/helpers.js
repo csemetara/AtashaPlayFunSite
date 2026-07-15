@@ -2,10 +2,10 @@
  * helpers.js
  * -----------------------------------------------------------------------
  * Small, pure, reusable utility functions with no dependencies on other
- * Atasha modules — safe to use anywhere, including future non-game UI.
+ * Luna modules — safe to use anywhere, including future non-game UI.
  * -----------------------------------------------------------------------
  */
-(function (Atasha) {
+(function (Luna) {
   'use strict';
 
   function shuffle(array) {
@@ -91,5 +91,5 @@
     return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
   }
 
-  Atasha.helpers = { shuffle, el, clamp, makeDraggable, isPointInside };
-})(window.Atasha = window.Atasha || {});
+  Luna.helpers = { shuffle, el, clamp, makeDraggable, isPointInside };
+})(window.Luna = window.Luna || {});

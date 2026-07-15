@@ -7,7 +7,7 @@
  * pattern recognition, replayable endlessly.
  * -----------------------------------------------------------------------
  */
-(function (Atasha) {
+(function (Luna) {
   'use strict';
 
   const CARD_BANK = [
@@ -25,7 +25,7 @@
 
   function buildDeck() {
     const pairs = CARD_BANK.flatMap((item) => [item, item]);
-    return Atasha.helpers.shuffle(pairs);
+    return Luna.helpers.shuffle(pairs);
   }
 
   function init(container, gameApi) {
@@ -47,7 +47,7 @@
     const deck = buildDeck();
 
     deck.forEach((cardData, index) => {
-      const card = Atasha.helpers.el('div', 'mg-card', { 'data-name': cardData.name });
+      const card = Luna.helpers.el('div', 'mg-card', { 'data-name': cardData.name });
       card.innerHTML = `
         <div class="mg-card-inner">
           <div class="mg-card-back">?</div>
@@ -112,7 +112,7 @@
     clickHandlers = [];
   }
 
-  Atasha.gameRegistry.register({
+  Luna.gameRegistry.register({
     id: 'memory-game',
     title: 'Memory Match',
     emoji: '🧠',
@@ -121,4 +121,4 @@
     init,
     destroy,
   });
-})(window.Atasha = window.Atasha || {});
+})(window.Luna = window.Luna || {});

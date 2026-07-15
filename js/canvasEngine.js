@@ -10,7 +10,7 @@
  * it only knows how to put pixels on a canvas from pointer input.
  * -----------------------------------------------------------------------
  */
-(function (Atasha) {
+(function (Luna) {
   'use strict';
 
   /**
@@ -162,5 +162,5 @@
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
-  Atasha.canvasEngine = { attachBrush, floodFill, clearCanvas, hexToRgba };
-})(window.Atasha = window.Atasha || {});
+  Luna.canvasEngine = { attachBrush, floodFill, clearCanvas, hexToRgba };
+})(window.Luna = window.Luna || {});

@@ -3,7 +3,7 @@
  * -----------------------------------------------------------------------
  * Open/Closed Principle in practice: this is the ONE list every game
  * appears in. Adding game #4 means creating js/games/new-game.js and
- * calling Atasha.gameRegistry.register({...}) at the bottom of it — nothing
+ * calling Luna.gameRegistry.register({...}) at the bottom of it — nothing
  * in router.js, ui.js, or any existing game file needs to change.
  *
  * Every registered game must implement:
@@ -21,7 +21,7 @@
  *   { speak, playSound, awardStars, calmMode, onExit }
  * -----------------------------------------------------------------------
  */
-(function (Atasha) {
+(function (Luna) {
   'use strict';
 
   const games = [];
@@ -44,5 +44,5 @@
     return games.find((g) => g.id === id) || null;
   }
 
-  Atasha.gameRegistry = { register, getAll, getById };
-})(window.Atasha = window.Atasha || {});
+  Luna.gameRegistry = { register, getAll, getById };
+})(window.Luna = window.Luna || {});

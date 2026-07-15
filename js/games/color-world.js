@@ -9,7 +9,7 @@
  * button, not something the game decides for them.
  * -----------------------------------------------------------------------
  */
-(function (Atasha) {
+(function (Luna) {
   'use strict';
 
   const PALETTE = ['#E85D5D', '#F4C94F', '#5FBF7A', '#5C9FE0', '#A374D6', '#F0965C', '#E88BC6', '#7A5C3E'];
@@ -96,14 +96,14 @@
 
   function redrawOutline() {
     const ctx = canvasEl.getContext('2d');
-    Atasha.canvasEngine.clearCanvas(canvasEl, '#ffffff');
+    Luna.canvasEngine.clearCanvas(canvasEl, '#ffffff');
     currentPicture.draw(ctx, canvasEl.width, canvasEl.height);
   }
 
   function buildPalette(container, brushControl) {
-    const row = Atasha.helpers.el('div', 'cw-palette-row');
+    const row = Luna.helpers.el('div', 'cw-palette-row');
     PALETTE.forEach((color) => {
-      const swatch = Atasha.helpers.el('button', 'cw-swatch', { 'aria-label': `Color ${color}` });
+      const swatch = Luna.helpers.el('button', 'cw-swatch', { 'aria-label': `Color ${color}` });
       swatch.style.background = color;
       swatch.addEventListener('click', () => {
         brushControl.setColor(color);
@@ -116,7 +116,7 @@
 
   function init(container, gameApi) {
     api = gameApi;
-    currentPicture = Atasha.helpers.shuffle(PICTURES)[0];
+    currentPicture = Luna.helpers.shuffle(PICTURES)[0];
     currentTool = 'brush';
 
     container.innerHTML = `
@@ -139,7 +139,7 @@
     canvasEl = container.querySelector('.cw-canvas');
     redrawOutline();
 
-    const brushControl = Atasha.canvasEngine.attachBrush(canvasEl, { color: PALETTE[0], lineWidth: 16 });
+    const brushControl = Luna.canvasEngine.attachBrush(canvasEl, { color: PALETTE[0], lineWidth: 16 });
     cleanupBrush = brushControl.cleanup;
 
     // Paint bucket: single click/tap fills the region, doesn't need drag tracking
@@ -151,7 +151,7 @@
       const scaleY = canvasEl.height / rect.height;
       const x = (point.clientX - rect.left) * scaleX;
       const y = (point.clientY - rect.top) * scaleY;
-      Atasha.canvasEngine.floodFill(canvasEl, x, y, activeColor);
+      Luna.canvasEngine.floodFill(canvasEl, x, y, activeColor);
       api.playSound('tap');
     }
     let activeColor = PALETTE[0];
@@ -195,7 +195,7 @@
     cleanupBrush = null;
   }
 
-  Atasha.gameRegistry.register({
+  Luna.gameRegistry.register({
     id: 'color-world',
     title: 'Color World',
     emoji: '🖍️',
@@ -204,4 +204,4 @@
     init,
     destroy,
   });
-})(window.Atasha = window.Atasha || {});
+})(window.Luna = window.Luna || {});
