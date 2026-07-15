@@ -10,7 +10,7 @@
  *     so repeated play feels familiar rather than chaotic.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const ITEM_BANK = [
@@ -33,7 +33,7 @@
   let api = null;
 
   function buildBowl(color, container) {
-    const bowl = Luna.helpers.el('div', 'cm-bowl', { 'data-color': color });
+    const bowl = Atasha.helpers.el('div', 'cm-bowl', { 'data-color': color });
     bowl.style.setProperty('--bowl-color', COLOR_HEX[color]);
     bowl.innerHTML = `<div class="cm-bowl-inner"></div>`;
     container.appendChild(bowl);
@@ -41,15 +41,15 @@
   }
 
   function buildItem(itemData, container) {
-    const item = Luna.helpers.el('div', 'cm-item', { 'data-color': itemData.color });
+    const item = Atasha.helpers.el('div', 'cm-item', { 'data-color': itemData.color });
     item.textContent = itemData.emoji;
     container.appendChild(item);
     return item;
   }
 
   function attachDrag(itemEl, itemData, bowls, onMatched) {
-    const cleanup = Luna.helpers.makeDraggable(itemEl, (x, y) => {
-      const targetBowl = bowls.find((b) => Luna.helpers.isPointInside(x, y, b));
+    const cleanup = Atasha.helpers.makeDraggable(itemEl, (x, y) => {
+      const targetBowl = bowls.find((b) => Atasha.helpers.isPointInside(x, y, b));
       if (targetBowl && targetBowl.dataset.color === itemData.color) {
         // Correct match
         itemEl.classList.add('cm-item-matched');
@@ -82,7 +82,7 @@
     matchedCount = 0;
     cleanupFns = [];
 
-    const chosen = Luna.helpers.shuffle(ITEM_BANK).slice(0, 4);
+    const chosen = Atasha.helpers.shuffle(ITEM_BANK).slice(0, 4);
     roundItems = chosen;
 
     container.innerHTML = `
@@ -97,7 +97,7 @@
     const itemsRow = container.querySelector('.cm-items-row');
     const bowlsRow = container.querySelector('.cm-bowls-row');
 
-    const bowls = Luna.helpers.shuffle(chosen).map((it) => buildBowl(it.color, bowlsRow));
+    const bowls = Atasha.helpers.shuffle(chosen).map((it) => buildBowl(it.color, bowlsRow));
     chosen.forEach((itemData) => {
       const itemEl = buildItem(itemData, itemsRow);
       attachDrag(itemEl, itemData, bowls, () => {
@@ -124,7 +124,7 @@
     cleanupFns = [];
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'color-matching',
     title: 'Color Match',
     emoji: '🎨',
@@ -133,4 +133,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

@@ -6,7 +6,7 @@
  * architecture, which is exactly what the registry pattern is for.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const SHAPE_BANK = [
@@ -22,22 +22,22 @@
   let api = null;
 
   function buildHole(shape, container) {
-    const hole = Luna.helpers.el('div', 'sh-hole', { 'data-shape': shape.id });
+    const hole = Atasha.helpers.el('div', 'sh-hole', { 'data-shape': shape.id });
     hole.innerHTML = `<svg viewBox="0 0 90 90" class="sh-hole-svg">${shape.svg}</svg>`;
     container.appendChild(hole);
     return hole;
   }
 
   function buildShape(shape, container) {
-    const item = Luna.helpers.el('div', 'sh-item', { 'data-shape': shape.id });
+    const item = Atasha.helpers.el('div', 'sh-item', { 'data-shape': shape.id });
     item.innerHTML = `<svg viewBox="0 0 90 90" class="sh-item-svg">${shape.svg}</svg>`;
     container.appendChild(item);
     return item;
   }
 
   function attachDrag(itemEl, shape, holes, onMatched) {
-    const cleanup = Luna.helpers.makeDraggable(itemEl, (x, y) => {
-      const targetHole = holes.find((h) => Luna.helpers.isPointInside(x, y, h));
+    const cleanup = Atasha.helpers.makeDraggable(itemEl, (x, y) => {
+      const targetHole = holes.find((h) => Atasha.helpers.isPointInside(x, y, h));
       if (targetHole && targetHole.dataset.shape === shape.id) {
         itemEl.classList.add('sh-item-matched');
         itemEl.style.pointerEvents = 'none';
@@ -66,7 +66,7 @@
     matchedCount = 0;
     cleanupFns = [];
 
-    const chosen = Luna.helpers.shuffle(SHAPE_BANK).slice(0, 4);
+    const chosen = Atasha.helpers.shuffle(SHAPE_BANK).slice(0, 4);
 
     container.innerHTML = `
       <div class="game-header">
@@ -80,7 +80,7 @@
     const holesRow = container.querySelector('.sh-holes-row');
     const itemsRow = container.querySelector('.sh-items-row');
 
-    const holes = Luna.helpers.shuffle(chosen).map((s) => buildHole(s, holesRow));
+    const holes = Atasha.helpers.shuffle(chosen).map((s) => buildHole(s, holesRow));
     chosen.forEach((shape) => {
       const itemEl = buildShape(shape, itemsRow);
       attachDrag(itemEl, shape, holes, () => {
@@ -107,7 +107,7 @@
     cleanupFns = [];
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'shape-matching',
     title: 'Shape Match',
     emoji: '🔺',
@@ -116,4 +116,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

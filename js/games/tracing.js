@@ -9,7 +9,7 @@
  * coverage — tracing can never be "failed", only finished.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const CANVAS_W = 500, CANVAS_H = 350;
@@ -115,7 +115,7 @@
   function init(container, gameApi) {
     api = gameApi;
     finished = false;
-    shape = Luna.helpers.shuffle(TRACE_BANK)[0];
+    shape = Atasha.helpers.shuffle(TRACE_BANK)[0];
     covered = shape.points.map(() => false);
 
     container.innerHTML = `
@@ -132,10 +132,10 @@
 
     canvasEl = container.querySelector('.tr-canvas');
     const ctx = canvasEl.getContext('2d');
-    Luna.canvasEngine.clearCanvas(canvasEl, '#ffffff');
+    Atasha.canvasEngine.clearCanvas(canvasEl, '#ffffff');
     drawGuide(ctx);
 
-    brushControl = Luna.canvasEngine.attachBrush(canvasEl, {
+    brushControl = Atasha.canvasEngine.attachBrush(canvasEl, {
       color: '#FF8B6B',
       lineWidth: 10,
       onStroke: checkCoverage,
@@ -151,7 +151,7 @@
     brushControl = null;
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'tracing',
     title: 'Tracing',
     emoji: '✏️',
@@ -160,4 +160,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

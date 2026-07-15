@@ -7,7 +7,7 @@
  * game is interchangeable from the router's point of view).
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   let rootEl = null;
@@ -21,17 +21,17 @@
   function goHome() {
     teardownCurrentGame();
     currentView = 'home';
-    Luna.ui.renderHome(rootEl, { onSelectGame: goToGame, onOpenDashboard: goToDashboard });
+    Atasha.ui.renderHome(rootEl, { onSelectGame: goToGame, onOpenDashboard: goToDashboard });
   }
 
   function goToDashboard() {
     teardownCurrentGame();
     currentView = 'dashboard';
-    Luna.ui.renderDashboard(rootEl, { onBack: goHome });
+    Atasha.ui.renderDashboard(rootEl, { onBack: goHome });
   }
 
   function goToGame(gameId) {
-    const game = Luna.gameRegistry.getById(gameId);
+    const game = Atasha.gameRegistry.getById(gameId);
     if (!game) {
       console.error(`[router] Unknown game id: ${gameId}`);
       return goHome();
@@ -49,10 +49,10 @@
     const gameContainer = rootEl.querySelector('.game-container');
 
     const api = {
-      speak: Luna.speech.speak,
-      playSound: Luna.audio.play,
-      awardStars: (amount) => Luna.rewards.awardStars(amount, game.id),
-      calmMode: !!Luna.storage.get('calmMode'),
+      speak: Atasha.speech.speak,
+      playSound: Atasha.audio.play,
+      awardStars: (amount) => Atasha.rewards.awardStars(amount, game.id),
+      calmMode: !!Atasha.storage.get('calmMode'),
       onComplete: () => goHome(),
     };
 
@@ -65,8 +65,8 @@
       currentGame.destroy();
     }
     currentGame = null;
-    Luna.speech.stop();
+    Atasha.speech.stop();
   }
 
-  Luna.router = { init, goHome, goToGame, goToDashboard };
-})(window.Luna = window.Luna || {});
+  Atasha.router = { init, goHome, goToGame, goToDashboard };
+})(window.Atasha = window.Atasha || {});

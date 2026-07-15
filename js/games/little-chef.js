@@ -10,7 +10,7 @@
  * recipe card fill in, not passing a sequence test.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   const RECIPES = [
@@ -42,11 +42,11 @@
   let api = null;
 
   function buildRecipeCard(container) {
-    const card = Luna.helpers.el('div', 'lc-recipe-card');
+    const card = Atasha.helpers.el('div', 'lc-recipe-card');
     card.innerHTML = `<h3>${recipe.name}</h3><div class="lc-slots"></div>`;
     const slots = card.querySelector('.lc-slots');
     recipe.ingredients.forEach((ing) => {
-      const slot = Luna.helpers.el('div', 'lc-slot', { 'data-name': ing.name });
+      const slot = Atasha.helpers.el('div', 'lc-slot', { 'data-name': ing.name });
       slot.textContent = '❔';
       slots.appendChild(slot);
     });
@@ -63,21 +63,21 @@
   }
 
   function buildPot(container) {
-    const pot = Luna.helpers.el('div', 'lc-pot');
+    const pot = Atasha.helpers.el('div', 'lc-pot');
     pot.innerHTML = `<div class="lc-pot-emoji">🍳</div><div class="lc-pot-label">Pot</div>`;
     container.appendChild(pot);
     return pot;
   }
 
   function buildTray(container) {
-    const tray = Luna.helpers.el('div', 'lc-tray');
+    const tray = Atasha.helpers.el('div', 'lc-tray');
     container.appendChild(tray);
     return tray;
   }
 
   function attachDrag(itemEl, ingredient, pot, card) {
-    const cleanup = Luna.helpers.makeDraggable(itemEl, (x, y) => {
-      if (Luna.helpers.isPointInside(x, y, pot)) {
+    const cleanup = Atasha.helpers.makeDraggable(itemEl, (x, y) => {
+      if (Atasha.helpers.isPointInside(x, y, pot)) {
         itemEl.classList.add('lc-item-added');
         itemEl.style.pointerEvents = 'none';
         api.playSound('success');
@@ -101,7 +101,7 @@
     api = gameApi;
     addedCount = 0;
     cleanupFns = [];
-    recipe = Luna.helpers.shuffle(RECIPES)[0];
+    recipe = Atasha.helpers.shuffle(RECIPES)[0];
 
     container.innerHTML = `
       <div class="game-header">
@@ -120,8 +120,8 @@
     const pot = buildPot(kitchen);
     const tray = buildTray(kitchen);
 
-    Luna.helpers.shuffle(recipe.ingredients).forEach((ing) => {
-      const item = Luna.helpers.el('div', 'lc-item');
+    Atasha.helpers.shuffle(recipe.ingredients).forEach((ing) => {
+      const item = Atasha.helpers.el('div', 'lc-item');
       item.textContent = ing.emoji;
       tray.appendChild(item);
       attachDrag(item, ing, pot, card);
@@ -133,7 +133,7 @@
   function finishRecipe(gameBody) {
     api.playSound('complete');
     api.speak(`Yay! You made ${recipe.name}! Delicious!`);
-    Luna.storage.update((state) => {
+    Atasha.storage.update((state) => {
       if (!state.cookbook.includes(recipe.id)) state.cookbook.push(recipe.id);
     });
     const result = api.awardStars(3);
@@ -151,7 +151,7 @@
     cleanupFns = [];
   }
 
-  Luna.gameRegistry.register({
+  Atasha.gameRegistry.register({
     id: 'little-chef',
     title: 'Little Chef',
     emoji: '🍳',
@@ -160,4 +160,4 @@
     init,
     destroy,
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});

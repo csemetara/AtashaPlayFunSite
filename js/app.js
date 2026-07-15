@@ -6,12 +6,12 @@
  * at the home screen.
  * -----------------------------------------------------------------------
  */
-(function (Luna) {
+(function (Atasha) {
   'use strict';
 
   document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('app-root');
-    Luna.router.init(root);
-    Luna.router.goHome();
+    Atasha.router.init(root);
+    Atasha.router.goHome();
   });
-})(window.Luna = window.Luna || {});
+})(window.Atasha = window.Atasha || {});
